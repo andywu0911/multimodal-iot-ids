@@ -1,0 +1,280 @@
+{
+  "experiment": "E2_kitsune_baseline",
+  "settings": {
+    "subset": "S3",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "evaluate_test": true
+  },
+  "threshold_quantile": 0.99,
+  "n_train_benign": 3045,
+  "provenance": {
+    "git_sha": "4e06c9b77d04384724a014363c7d145393645705",
+    "git_dirty": true,
+    "config": {
+      "PROJECT_ROOT": ".",
+      "GOTHAM_ROOT": "data/raw/gotham2025",
+      "PCAP_ROOT": "data/raw/gotham2025/raw",
+      "OFFICIAL_CSV_ROOT": "data/raw/gotham2025/processed",
+      "DATA_INTERIM": "data/interim",
+      "DATA_PROCESSED": "data/processed",
+      "LABEL_INDEX_DIR": "data/interim/label_index",
+      "FLOW_DIR": "data/processed/flows",
+      "FEATURES_DIR": "data/processed/features",
+      "RESULTS_DIR": "results",
+      "CHECKPOINTS_DIR": "models",
+      "RANDOM_SEED": 42,
+      "SCENARIOS": {
+        "benign": "benign",
+        "network-scanning": "malicious/network-scanning",
+        "coap-amplificator": "malicious/coap-amplificator",
+        "merlin": "malicious/merlin",
+        "mirai-infection": "malicious/mirai-infection",
+        "mirai-dos": "malicious/mirai-dos"
+      },
+      "SCENARIO_DATES": {
+        "benign": "2025-01-14",
+        "network-scanning": "2025-01-14",
+        "coap-amplificator": "2025-01-15",
+        "merlin": "2025-01-17",
+        "mirai-infection": "2025-01-18",
+        "mirai-dos": "2025-01-25"
+      },
+      "PCAP_PREFIX": "iotsim-",
+      "ATTACKED_DEVICES": [
+        "air-quality-1",
+        "building-monitor-1",
+        "city-power-1",
+        "combined-cycle-1",
+        "combined-cycle-10",
+        "domotic-monitor-1",
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "CAMERA_DEVICES": [
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "SUBSETS": {
+        "S1": {
+          "devices": [
+            "air-quality-1",
+            "combined-cycle-10"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S2": {
+          "devices": [
+            "air-quality-1",
+            "building-monitor-1",
+            "city-power-1",
+            "combined-cycle-1",
+            "combined-cycle-10",
+            "domotic-monitor-1"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S3": {
+          "devices": null,
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        }
+      },
+      "FLOW_KEY_MODE": "5tuple",
+      "FLOW_KEY_MODES": [
+        "5tuple",
+        "hostpair"
+      ],
+      "IDLE_TIMEOUT": 60.0,
+      "ACTIVE_TIMEOUT": 300.0,
+      "MAX_PKTS_PER_FLOW": 200,
+      "PAYLOAD_BYTES": 512,
+      "WINDOW_CAP_PER_CONN": 20,
+      "CONTEXT_WINDOWS": [
+        1.0,
+        10.0,
+        60.0
+      ],
+      "SEQ_LEN": 32,
+      "MAX_OPEN_FLOWS": 2000000,
+      "INNER_CARD_CAP": 4096,
+      "MAX_FLOWS_PER_RAW_LABEL": 5000,
+      "E1_SAMPLE_FRAC": 0.1,
+      "SPLIT_TRAIN_FRAC": 0.6,
+      "SPLIT_VAL_FRAC": 0.2,
+      "MIN_CONNS_FOR_GROUP_SPLIT": 3,
+      "EMBED_DIM": 64,
+      "EPOCHS": 30,
+      "BATCH_SIZE": 256,
+      "LEARNING_RATE": 0.001,
+      "CB_BETA": 0.999,
+      "LAMBDA_DET": 0.5,
+      "EVAL_SEEDS": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "SHORTCUT_COLUMNS": [
+        "device",
+        "src_ip",
+        "dst_ip",
+        "src_mac",
+        "dst_mac",
+        "src_port",
+        "dst_port",
+        "ip_checksum",
+        "tcp_checksum"
+      ],
+      "VIEW_A_PORT_VARIANTS": [
+        "with_port",
+        "no_port"
+      ]
+    },
+    "input_sha256_16": "e19ab98b18b7d8b6",
+    "input_path": "data/processed/features/S3/manifest.parquet"
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "n_clusters": 24,
+      "threshold": 0.11768476665019989,
+      "val": {
+        "roc_auc": 0.9983040280751725,
+        "pr_auc": 0.9997400159537331,
+        "precision": 0.9985524030110018,
+        "recall": 0.9638116529272042,
+        "f1": 0.9808745111980093,
+        "fpr": 0.01015228426395939,
+        "n_benign": 985
+      },
+      "test": {
+        "roc_auc": 0.9983711977475429,
+        "pr_auc": 0.999749124235157,
+        "precision": 0.9987953621442553,
+        "recall": 0.9318628828322563,
+        "f1": 0.9641689076241006,
+        "fpr": 0.008247422680412371,
+        "n_benign": 970
+      }
+    },
+    {
+      "seed": 43,
+      "n_clusters": 24,
+      "threshold": 0.13216236233711243,
+      "val": {
+        "roc_auc": 0.9978570552134185,
+        "pr_auc": 0.9996705279302311,
+        "precision": 0.9984116899618806,
+        "recall": 0.8783009640910996,
+        "f1": 0.9345127480859288,
+        "fpr": 0.01015228426395939,
+        "n_benign": 985
+      },
+      "test": {
+        "roc_auc": 0.99821781862738,
+        "pr_auc": 0.9997241954730667,
+        "precision": 0.99867637326274,
+        "recall": 0.8479910087103119,
+        "f1": 0.9171858380185383,
+        "fpr": 0.008247422680412371,
+        "n_benign": 970
+      }
+    },
+    {
+      "seed": 44,
+      "n_clusters": 24,
+      "threshold": 0.13806620240211487,
+      "val": {
+        "roc_auc": 0.9980979184058204,
+        "pr_auc": 0.9997154459831088,
+        "precision": 0.9983992316311829,
+        "recall": 0.8714545200503004,
+        "f1": 0.9306177260519248,
+        "fpr": 0.01015228426395939,
+        "n_benign": 985
+      },
+      "test": {
+        "roc_auc": 0.9983735150902461,
+        "pr_auc": 0.9997511310781634,
+        "precision": 0.9986863711001642,
+        "recall": 0.8544534981736442,
+        "f1": 0.9209569957601453,
+        "fpr": 0.008247422680412371,
+        "n_benign": 970
+      }
+    },
+    {
+      "seed": 45,
+      "n_clusters": 24,
+      "threshold": 0.11878859996795654,
+      "val": {
+        "roc_auc": 0.9982685652965504,
+        "pr_auc": 0.9997403640439538,
+        "precision": 0.9985339393050873,
+        "recall": 0.9516557216710912,
+        "f1": 0.9745314064959222,
+        "fpr": 0.01015228426395939,
+        "n_benign": 985
+      },
+      "test": {
+        "roc_auc": 0.9981898656810235,
+        "pr_auc": 0.9997251663801114,
+        "precision": 0.9987735704430477,
+        "recall": 0.9152851924697949,
+        "f1": 0.9552085624221098,
+        "fpr": 0.008247422680412371,
+        "n_benign": 970
+      }
+    },
+    {
+      "seed": 46,
+      "n_clusters": 24,
+      "threshold": 0.12163304537534714,
+      "val": {
+        "roc_auc": 0.99793989626428,
+        "pr_auc": 0.99968707599784,
+        "precision": 0.9984094162557658,
+        "recall": 0.8770434539611569,
+        "f1": 0.9337994644451056,
+        "fpr": 0.01015228426395939,
+        "n_benign": 985
+      },
+      "test": {
+        "roc_auc": 0.9982714071773897,
+        "pr_auc": 0.999733494261642,
+        "precision": 0.9986962190352021,
+        "recall": 0.8609159876369766,
+        "f1": 0.9247019767617323,
+        "fpr": 0.008247422680412371,
+        "n_benign": 970
+      }
+    }
+  ]
+}

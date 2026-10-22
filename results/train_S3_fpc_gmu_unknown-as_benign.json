@@ -1,0 +1,1006 @@
+{
+  "settings": {
+    "subset": "S3",
+    "modalities": "fpc",
+    "fusion": "gmu",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "unknown_policy": "as_benign",
+    "checkpoint": false,
+    "evaluate_test": true
+  },
+  "model_config": {
+    "modalities": "fpc",
+    "fusion": "gmu",
+    "embed_dim": 64,
+    "stats_dim": 36,
+    "ctx_dim": 42,
+    "epochs": 30,
+    "batch_size": 256,
+    "lr": 0.001,
+    "lambda_det": 0.5,
+    "seed": 44,
+    "cb_beta": 0.999
+  },
+  "provenance": {
+    "git_sha": "f9083325bc06199e85cb42b900a65c170fc5b795",
+    "git_dirty": true,
+    "config": {
+      "PROJECT_ROOT": ".",
+      "GOTHAM_ROOT": "data/raw/gotham2025",
+      "PCAP_ROOT": "data/raw/gotham2025/raw",
+      "OFFICIAL_CSV_ROOT": "data/raw/gotham2025/processed",
+      "DATA_INTERIM": "data/interim",
+      "DATA_PROCESSED": "data/processed",
+      "LABEL_INDEX_DIR": "data/interim/label_index",
+      "FLOW_DIR": "data/processed/flows",
+      "FEATURES_DIR": "data/processed/features",
+      "RESULTS_DIR": "results",
+      "CHECKPOINTS_DIR": "models",
+      "RANDOM_SEED": 42,
+      "SCENARIOS": {
+        "benign": "benign",
+        "network-scanning": "malicious/network-scanning",
+        "coap-amplificator": "malicious/coap-amplificator",
+        "merlin": "malicious/merlin",
+        "mirai-infection": "malicious/mirai-infection",
+        "mirai-dos": "malicious/mirai-dos"
+      },
+      "SCENARIO_DATES": {
+        "benign": "2025-01-14",
+        "network-scanning": "2025-01-14",
+        "coap-amplificator": "2025-01-15",
+        "merlin": "2025-01-17",
+        "mirai-infection": "2025-01-18",
+        "mirai-dos": "2025-01-25"
+      },
+      "PCAP_PREFIX": "iotsim-",
+      "ATTACKED_DEVICES": [
+        "air-quality-1",
+        "building-monitor-1",
+        "city-power-1",
+        "combined-cycle-1",
+        "combined-cycle-10",
+        "domotic-monitor-1",
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "CAMERA_DEVICES": [
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "SUBSETS": {
+        "S1": {
+          "devices": [
+            "air-quality-1",
+            "combined-cycle-10"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S2": {
+          "devices": [
+            "air-quality-1",
+            "building-monitor-1",
+            "city-power-1",
+            "combined-cycle-1",
+            "combined-cycle-10",
+            "domotic-monitor-1"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S3": {
+          "devices": null,
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        }
+      },
+      "FLOW_KEY_MODE": "5tuple",
+      "FLOW_KEY_MODES": [
+        "5tuple",
+        "hostpair"
+      ],
+      "IDLE_TIMEOUT": 60.0,
+      "ACTIVE_TIMEOUT": 300.0,
+      "MAX_PKTS_PER_FLOW": 200,
+      "PAYLOAD_BYTES": 512,
+      "WINDOW_CAP_PER_CONN": 20,
+      "CONTEXT_WINDOWS": [
+        1.0,
+        10.0,
+        60.0
+      ],
+      "SEQ_LEN": 32,
+      "MAX_OPEN_FLOWS": 2000000,
+      "INNER_CARD_CAP": 4096,
+      "MAX_FLOWS_PER_RAW_LABEL": 5000,
+      "E1_SAMPLE_FRAC": 0.1,
+      "SPLIT_TRAIN_FRAC": 0.6,
+      "SPLIT_VAL_FRAC": 0.2,
+      "MIN_CONNS_FOR_GROUP_SPLIT": 3,
+      "EMBED_DIM": 64,
+      "EPOCHS": 30,
+      "BATCH_SIZE": 256,
+      "LEARNING_RATE": 0.001,
+      "CB_BETA": 0.999,
+      "LAMBDA_DET": 0.5,
+      "EVAL_SEEDS": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "SHORTCUT_COLUMNS": [
+        "device",
+        "src_ip",
+        "dst_ip",
+        "src_mac",
+        "dst_mac",
+        "src_port",
+        "dst_port",
+        "ip_checksum",
+        "tcp_checksum"
+      ],
+      "VIEW_A_PORT_VARIANTS": [
+        "with_port",
+        "no_port"
+      ]
+    },
+    "input_sha256_16": "e19ab98b18b7d8b6",
+    "input_path": "data/processed/features/S3/manifest.parquet"
+  },
+  "n": {
+    "train": 26028,
+    "val": 8598,
+    "test": 8545
+  },
+  "summary": {
+    "val": {
+      "tactic_macro_f1_mean": 0.9951714179970259,
+      "tactic_macro_f1_std": 0.0012589960620640443,
+      "detection_f1_mean": 0.9988134064255535,
+      "detection_f1_std": 0.00015097398999971688
+    },
+    "test": {
+      "tactic_macro_f1_mean": 0.991050252711124,
+      "tactic_macro_f1_std": 0.001026062557234059,
+      "detection_f1_mean": 0.9974072084249112,
+      "detection_f1_std": 5.721776423738899e-05
+    }
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "best_epoch": 24,
+      "val": {
+        "tactic": {
+          "accuracy": 0.9981391021167714,
+          "macro_f1": 0.9962099966807867,
+          "report": {
+            "Benign": {
+              "precision": 1.0,
+              "recall": 0.9895905621096461,
+              "f1-score": 0.9947680502267178,
+              "support": 1441.0
+            },
+            "Reconnaissance": {
+              "precision": 0.9972241498959056,
+              "recall": 1.0,
+              "f1-score": 0.9986101459346769,
+              "support": 1437.0
+            },
+            "Credential Access": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 632.0
+            },
+            "Tool Transfer": {
+              "precision": 1.0,
+              "recall": 0.9705882352941176,
+              "f1-score": 0.9850746268656716,
+              "support": 34.0
+            },
+            "Command & Control": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 30.0
+            },
+            "Impact": {
+              "precision": 0.9976171564733916,
+              "recall": 1.0,
+              "f1-score": 0.9988071570576541,
+              "support": 5024.0
+            },
+            "accuracy": 0.9981391021167714,
+            "macro avg": {
+              "precision": 0.9991402177282162,
+              "recall": 0.9933631329006273,
+              "f1-score": 0.9962099966807867,
+              "support": 8598.0
+            },
+            "weighted avg": {
+              "precision": 0.9981437191815231,
+              "recall": 0.9981391021167714,
+              "f1-score": 0.9981348260590739,
+              "support": 8598.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              1426,
+              3,
+              0,
+              0,
+              0,
+              12
+            ],
+            [
+              0,
+              1437,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              632,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              33,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              30,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0,
+              5024
+            ]
+          ],
+          "cc_breakdown": {
+            "Mirai C&C Communication": {
+              "n_windows": 8,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            },
+            "Merlin C&C Communication": {
+              "n_windows": 20,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            }
+          }
+        },
+        "detection": {
+          "precision": 0.9979085331846068,
+          "recall": 1.0,
+          "f1": 0.9989531718891758,
+          "fpr": 0.010409437890353921,
+          "n_benign": 1441,
+          "roc_auc": 0.9927399127936264,
+          "pr_auc": 0.9950201335234266
+        },
+        "gates_mean": [
+          0.210728257894516,
+          0.4494180381298065,
+          0.3398537337779999
+        ]
+      },
+      "test": {
+        "tactic": {
+          "accuracy": 0.9952018724400234,
+          "macro_f1": 0.9896284426756418,
+          "report": {
+            "Benign": {
+              "precision": 1.0,
+              "recall": 0.9754730203223546,
+              "f1-score": 0.9875842497339482,
+              "support": 1427.0
+            },
+            "Reconnaissance": {
+              "precision": 0.997855611150822,
+              "recall": 0.9971428571428571,
+              "f1-score": 0.9974991068238657,
+              "support": 1400.0
+            },
+            "Credential Access": {
+              "precision": 0.9968304278922345,
+              "recall": 1.0,
+              "f1-score": 0.9984126984126984,
+              "support": 629.0
+            },
+            "Tool Transfer": {
+              "precision": 0.9444444444444444,
+              "recall": 0.9714285714285714,
+              "f1-score": 0.9577464788732394,
+              "support": 35.0
+            },
+            "Command & Control": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 30.0
+            },
+            "Impact": {
+              "precision": 0.9932766462329444,
+              "recall": 0.9998009554140127,
+              "f1-score": 0.9965281222100982,
+              "support": 5024.0
+            },
+            "accuracy": 0.9952018724400234,
+            "macro avg": {
+              "precision": 0.9887345216200742,
+              "recall": 0.990640900717966,
+              "f1-score": 0.9896284426756418,
+              "support": 8545.0
+            },
+            "weighted avg": {
+              "precision": 0.995234829840285,
+              "recall": 0.9952018724400234,
+              "f1-score": 0.9951856610847795,
+              "support": 8545.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              1392,
+              1,
+              0,
+              0,
+              0,
+              34
+            ],
+            [
+              0,
+              1396,
+              2,
+              2,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              629,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              34,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              30,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              5023
+            ]
+          ],
+          "cc_breakdown": {
+            "Mirai C&C Communication": {
+              "n_windows": 8,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            },
+            "Merlin C&C Communication": {
+              "n_windows": 20,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            }
+          }
+        },
+        "detection": {
+          "precision": 0.9951062639821029,
+          "recall": 0.9998595110986233,
+          "f1": 0.9974772249474422,
+          "fpr": 0.02452697967764541,
+          "n_benign": 1427,
+          "roc_auc": 0.9793788972871563,
+          "pr_auc": 0.9910413241429235
+        },
+        "gates_mean": [
+          0.20655333995819092,
+          0.45189011096954346,
+          0.3415587842464447
+        ]
+      }
+    },
+    {
+      "seed": 43,
+      "best_epoch": 26,
+      "val": {
+        "tactic": {
+          "accuracy": 0.9979064898813678,
+          "macro_f1": 0.9959045752067666,
+          "report": {
+            "Benign": {
+              "precision": 0.9992992291520673,
+              "recall": 0.9895905621096461,
+              "f1-score": 0.9944211994421199,
+              "support": 1441.0
+            },
+            "Reconnaissance": {
+              "precision": 0.9965301873698821,
+              "recall": 0.9993041057759221,
+              "f1-score": 0.9979152189020153,
+              "support": 1437.0
+            },
+            "Credential Access": {
+              "precision": 0.9984202211690363,
+              "recall": 1.0,
+              "f1-score": 0.9992094861660079,
+              "support": 632.0
+            },
+            "Tool Transfer": {
+              "precision": 1.0,
+              "recall": 0.9705882352941176,
+              "f1-score": 0.9850746268656716,
+              "support": 34.0
+            },
+            "Command & Control": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 30.0
+            },
+            "Impact": {
+              "precision": 0.9978148589590783,
+              "recall": 0.9998009554140127,
+              "f1-score": 0.9988069198647842,
+              "support": 5024.0
+            },
+            "accuracy": 0.9979064898813678,
+            "macro avg": {
+              "precision": 0.998677416108344,
+              "recall": 0.993213976432283,
+              "f1-score": 0.9959045752067666,
+              "support": 8598.0
+            },
+            "weighted avg": {
+              "precision": 0.9979096882586519,
+              "recall": 0.9979064898813678,
+              "f1-score": 0.9979023047138074,
+              "support": 8598.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              1426,
+              4,
+              0,
+              0,
+              0,
+              11
+            ],
+            [
+              0,
+              1436,
+              1,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              632,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              33,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              30,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              5023
+            ]
+          ],
+          "cc_breakdown": {
+            "Mirai C&C Communication": {
+              "n_windows": 8,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            },
+            "Merlin C&C Communication": {
+              "n_windows": 20,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            }
+          }
+        },
+        "detection": {
+          "precision": 0.9979082415283782,
+          "recall": 0.9998602766522285,
+          "f1": 0.9988833054159687,
+          "fpr": 0.010409437890353921,
+          "n_benign": 1441,
+          "roc_auc": 0.9974863857002414,
+          "pr_auc": 0.9994082065328486
+        },
+        "gates_mean": [
+          0.1928415447473526,
+          0.5156334638595581,
+          0.291524201631546
+        ]
+      },
+      "test": {
+        "tactic": {
+          "accuracy": 0.9953188999414863,
+          "macro_f1": 0.9920122527791708,
+          "report": {
+            "Benign": {
+              "precision": 0.9992816091954023,
+              "recall": 0.9747722494744219,
+              "f1-score": 0.9868747782901738,
+              "support": 1427.0
+            },
+            "Reconnaissance": {
+              "precision": 0.9992852037169406,
+              "recall": 0.9985714285714286,
+              "f1-score": 0.9989281886387996,
+              "support": 1400.0
+            },
+            "Credential Access": {
+              "precision": 0.9968304278922345,
+              "recall": 1.0,
+              "f1-score": 0.9984126984126984,
+              "support": 629.0
+            },
+            "Tool Transfer": {
+              "precision": 0.9714285714285714,
+              "recall": 0.9714285714285714,
+              "f1-score": 0.9714285714285714,
+              "support": 35.0
+            },
+            "Command & Control": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 30.0
+            },
+            "Impact": {
+              "precision": 0.9930802688809807,
+              "recall": 0.9998009554140127,
+              "f1-score": 0.9964292799047808,
+              "support": 5024.0
+            },
+            "accuracy": 0.9953188999414863,
+            "macro avg": {
+              "precision": 0.9933176801856883,
+              "recall": 0.9907622008147391,
+              "f1-score": 0.9920122527791708,
+              "support": 8545.0
+            },
+            "weighted avg": {
+              "precision": 0.9953441488037236,
+              "recall": 0.9953188999414863,
+              "f1-score": 0.9952992466070922,
+              "support": 8545.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              1391,
+              0,
+              0,
+              1,
+              0,
+              35
+            ],
+            [
+              0,
+              1398,
+              2,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              629,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              34,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              30,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              5023
+            ]
+          ],
+          "cc_breakdown": {
+            "Mirai C&C Communication": {
+              "n_windows": 8,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            },
+            "Merlin C&C Communication": {
+              "n_windows": 20,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            }
+          }
+        },
+        "detection": {
+          "precision": 0.9949671466517546,
+          "recall": 0.9998595110986233,
+          "f1": 0.9974073295494359,
+          "fpr": 0.025227750525578137,
+          "n_benign": 1427,
+          "roc_auc": 0.9889061516417709,
+          "pr_auc": 0.9966979394847497
+        },
+        "gates_mean": [
+          0.1929924488067627,
+          0.5144969820976257,
+          0.29251009225845337
+        ]
+      }
+    },
+    {
+      "seed": 44,
+      "best_epoch": 13,
+      "val": {
+        "tactic": {
+          "accuracy": 0.9979064898813678,
+          "macro_f1": 0.9933996821035245,
+          "report": {
+            "Benign": {
+              "precision": 1.0,
+              "recall": 0.9895905621096461,
+              "f1-score": 0.9947680502267178,
+              "support": 1441.0
+            },
+            "Reconnaissance": {
+              "precision": 0.9958419958419958,
+              "recall": 1.0,
+              "f1-score": 0.9979166666666667,
+              "support": 1437.0
+            },
+            "Credential Access": {
+              "precision": 0.9984202211690363,
+              "recall": 1.0,
+              "f1-score": 0.9992094861660079,
+              "support": 632.0
+            },
+            "Tool Transfer": {
+              "precision": 1.0,
+              "recall": 0.9411764705882353,
+              "f1-score": 0.9696969696969697,
+              "support": 34.0
+            },
+            "Command & Control": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 30.0
+            },
+            "Impact": {
+              "precision": 0.9978148589590783,
+              "recall": 0.9998009554140127,
+              "f1-score": 0.9988069198647842,
+              "support": 5024.0
+            },
+            "accuracy": 0.9979064898813678,
+            "macro avg": {
+              "precision": 0.9986795126616851,
+              "recall": 0.9884279980186489,
+              "f1-score": 0.9933996821035245,
+              "support": 8598.0
+            },
+            "weighted avg": {
+              "precision": 0.9979121166799474,
+              "recall": 0.9979064898813678,
+              "f1-score": 0.9978998683419388,
+              "support": 8598.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              1426,
+              4,
+              0,
+              0,
+              0,
+              11
+            ],
+            [
+              0,
+              1437,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              632,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1,
+              32,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              30,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              0,
+              0,
+              5023
+            ]
+          ],
+          "cc_breakdown": {
+            "Mirai C&C Communication": {
+              "n_windows": 8,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            },
+            "Merlin C&C Communication": {
+              "n_windows": 20,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            }
+          }
+        },
+        "detection": {
+          "precision": 0.9979070740895772,
+          "recall": 0.9993013832611429,
+          "f1": 0.9986037419715164,
+          "fpr": 0.010409437890353921,
+          "n_benign": 1441,
+          "roc_auc": 0.9998104377898036,
+          "pr_auc": 0.9999614822153833
+        },
+        "gates_mean": [
+          0.10270889103412628,
+          0.6391425132751465,
+          0.25814950466156006
+        ]
+      },
+      "test": {
+        "tactic": {
+          "accuracy": 0.9949678174370977,
+          "macro_f1": 0.9915100626785595,
+          "report": {
+            "Benign": {
+              "precision": 0.9992816091954023,
+              "recall": 0.9747722494744219,
+              "f1-score": 0.9868747782901738,
+              "support": 1427.0
+            },
+            "Reconnaissance": {
+              "precision": 0.9985683607730852,
+              "recall": 0.9964285714285714,
+              "f1-score": 0.9974973185555953,
+              "support": 1400.0
+            },
+            "Credential Access": {
+              "precision": 0.9936808846761453,
+              "recall": 1.0,
+              "f1-score": 0.9968304278922345,
+              "support": 629.0
+            },
+            "Tool Transfer": {
+              "precision": 0.9714285714285714,
+              "recall": 0.9714285714285714,
+              "f1-score": 0.9714285714285714,
+              "support": 35.0
+            },
+            "Command & Control": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 30.0
+            },
+            "Impact": {
+              "precision": 0.9930802688809807,
+              "recall": 0.9998009554140127,
+              "f1-score": 0.9964292799047808,
+              "support": 5024.0
+            },
+            "accuracy": 0.9949678174370977,
+            "macro avg": {
+              "precision": 0.9926732824923642,
+              "recall": 0.9904050579575961,
+              "f1-score": 0.9915100626785595,
+              "support": 8545.0
+            },
+            "weighted avg": {
+              "precision": 0.9949948635135754,
+              "recall": 0.9949678174370977,
+              "f1-score": 0.9949483435908422,
+              "support": 8545.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              1391,
+              1,
+              0,
+              0,
+              0,
+              35
+            ],
+            [
+              0,
+              1395,
+              4,
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              629,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0,
+              34,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              30,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0,
+              5023
+            ]
+          ],
+          "cc_breakdown": {
+            "Mirai C&C Communication": {
+              "n_windows": 8,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            },
+            "Merlin C&C Communication": {
+              "n_windows": 20,
+              "n_connections": 1,
+              "recall_to_CC": 1.0
+            }
+          }
+        },
+        "detection": {
+          "precision": 0.9949664429530202,
+          "recall": 0.9997190221972464,
+          "f1": 0.9973370707778556,
+          "fpr": 0.025227750525578137,
+          "n_benign": 1427,
+          "roc_auc": 0.9983542025477815,
+          "pr_auc": 0.9996561467367242
+        },
+        "gates_mean": [
+          0.10072708874940872,
+          0.634788990020752,
+          0.26448333263397217
+        ]
+      }
+    }
+  ]
+}

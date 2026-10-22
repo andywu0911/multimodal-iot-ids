@@ -1,0 +1,530 @@
+{
+  "experiment": "E4_leave_one_device_out",
+  "settings": {
+    "subset": "S3",
+    "modalities": "fp",
+    "fusion": "gmu",
+    "seed": 42,
+    "devices": [
+      "air-quality-1",
+      "building-monitor-1",
+      "city-power-1",
+      "combined-cycle-1",
+      "combined-cycle-10",
+      "domotic-monitor-1",
+      "ip-camera-museum-1",
+      "ip-camera-street-1"
+    ],
+    "with_baseline": false
+  },
+  "provenance": {
+    "git_sha": "f9083325bc06199e85cb42b900a65c170fc5b795",
+    "git_dirty": true,
+    "config": {
+      "PROJECT_ROOT": ".",
+      "GOTHAM_ROOT": "data/raw/gotham2025",
+      "PCAP_ROOT": "data/raw/gotham2025/raw",
+      "OFFICIAL_CSV_ROOT": "data/raw/gotham2025/processed",
+      "DATA_INTERIM": "data/interim",
+      "DATA_PROCESSED": "data/processed",
+      "LABEL_INDEX_DIR": "data/interim/label_index",
+      "FLOW_DIR": "data/processed/flows",
+      "FEATURES_DIR": "data/processed/features",
+      "RESULTS_DIR": "results",
+      "CHECKPOINTS_DIR": "models",
+      "RANDOM_SEED": 42,
+      "SCENARIOS": {
+        "benign": "benign",
+        "network-scanning": "malicious/network-scanning",
+        "coap-amplificator": "malicious/coap-amplificator",
+        "merlin": "malicious/merlin",
+        "mirai-infection": "malicious/mirai-infection",
+        "mirai-dos": "malicious/mirai-dos"
+      },
+      "SCENARIO_DATES": {
+        "benign": "2025-01-14",
+        "network-scanning": "2025-01-14",
+        "coap-amplificator": "2025-01-15",
+        "merlin": "2025-01-17",
+        "mirai-infection": "2025-01-18",
+        "mirai-dos": "2025-01-25"
+      },
+      "PCAP_PREFIX": "iotsim-",
+      "ATTACKED_DEVICES": [
+        "air-quality-1",
+        "building-monitor-1",
+        "city-power-1",
+        "combined-cycle-1",
+        "combined-cycle-10",
+        "domotic-monitor-1",
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "CAMERA_DEVICES": [
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "SUBSETS": {
+        "S1": {
+          "devices": [
+            "air-quality-1",
+            "combined-cycle-10"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S2": {
+          "devices": [
+            "air-quality-1",
+            "building-monitor-1",
+            "city-power-1",
+            "combined-cycle-1",
+            "combined-cycle-10",
+            "domotic-monitor-1"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S3": {
+          "devices": null,
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        }
+      },
+      "FLOW_KEY_MODE": "5tuple",
+      "FLOW_KEY_MODES": [
+        "5tuple",
+        "hostpair"
+      ],
+      "IDLE_TIMEOUT": 60.0,
+      "ACTIVE_TIMEOUT": 300.0,
+      "MAX_PKTS_PER_FLOW": 200,
+      "PAYLOAD_BYTES": 512,
+      "WINDOW_CAP_PER_CONN": 20,
+      "CONTEXT_WINDOWS": [
+        1.0,
+        10.0,
+        60.0
+      ],
+      "SEQ_LEN": 32,
+      "MAX_OPEN_FLOWS": 2000000,
+      "INNER_CARD_CAP": 4096,
+      "MAX_FLOWS_PER_RAW_LABEL": 5000,
+      "E1_SAMPLE_FRAC": 0.1,
+      "SPLIT_TRAIN_FRAC": 0.6,
+      "SPLIT_VAL_FRAC": 0.2,
+      "MIN_CONNS_FOR_GROUP_SPLIT": 3,
+      "EMBED_DIM": 64,
+      "EPOCHS": 30,
+      "BATCH_SIZE": 256,
+      "LEARNING_RATE": 0.001,
+      "CB_BETA": 0.999,
+      "LAMBDA_DET": 0.5,
+      "EVAL_SEEDS": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "SHORTCUT_COLUMNS": [
+        "device",
+        "src_ip",
+        "dst_ip",
+        "src_mac",
+        "dst_mac",
+        "src_port",
+        "dst_port",
+        "ip_checksum",
+        "tcp_checksum"
+      ],
+      "VIEW_A_PORT_VARIANTS": [
+        "with_port",
+        "no_port"
+      ]
+    },
+    "input_sha256_16": "e19ab98b18b7d8b6",
+    "input_path": "data/processed/features/S3/manifest.parquet"
+  },
+  "benign_label_id": 0,
+  "devices": [
+    {
+      "device": "air-quality-1",
+      "n_test": 579,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.772958500669344,
+        "per_class": {
+          "Benign": {
+            "n": 185,
+            "recall": 1.0,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 27,
+            "recall": 0.07407407407407407,
+            "top_confusion": "Credential Access"
+          },
+          "Credential Access": {
+            "n": 365,
+            "recall": 0.9808219178082191,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 2,
+            "recall": 1.0,
+            "top_confusion": "Tool Transfer"
+          }
+        }
+      }
+    },
+    {
+      "device": "building-monitor-1",
+      "n_test": 6972,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Command & Control",
+        "Impact"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.8679905000700053,
+        "per_class": {
+          "Benign": {
+            "n": 175,
+            "recall": 0.9257142857142857,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 992,
+            "recall": 0.9324596774193549,
+            "top_confusion": "Reconnaissance"
+          },
+          "Credential Access": {
+            "n": 380,
+            "recall": 0.9842105263157894,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 37,
+            "recall": 0.972972972972973,
+            "top_confusion": "Tool Transfer"
+          },
+          "Command & Control": {
+            "n": 31,
+            "recall": 0.3225806451612903,
+            "top_confusion": "Benign"
+          },
+          "Impact": {
+            "n": 5357,
+            "recall": 1.0,
+            "top_confusion": "Impact"
+          }
+        }
+      }
+    },
+    {
+      "device": "city-power-1",
+      "n_test": 3202,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Impact"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.8181944481464928,
+        "per_class": {
+          "Benign": {
+            "n": 107,
+            "recall": 1.0,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 27,
+            "recall": 0.07407407407407407,
+            "top_confusion": "Credential Access"
+          },
+          "Credential Access": {
+            "n": 418,
+            "recall": 0.9904306220095693,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 2,
+            "recall": 1.0,
+            "top_confusion": "Tool Transfer"
+          },
+          "Impact": {
+            "n": 2648,
+            "recall": 1.0,
+            "top_confusion": "Impact"
+          }
+        }
+      }
+    },
+    {
+      "device": "combined-cycle-1",
+      "n_test": 9220,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Command & Control",
+        "Impact"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.6454554061059009,
+        "per_class": {
+          "Benign": {
+            "n": 51,
+            "recall": 0.45098039215686275,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 3243,
+            "recall": 0.7200123342584027,
+            "top_confusion": "Reconnaissance"
+          },
+          "Credential Access": {
+            "n": 469,
+            "recall": 0.9850746268656716,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 36,
+            "recall": 0.9722222222222222,
+            "top_confusion": "Tool Transfer"
+          },
+          "Command & Control": {
+            "n": 32,
+            "recall": 0.3125,
+            "top_confusion": "Benign"
+          },
+          "Impact": {
+            "n": 5389,
+            "recall": 0.9961031731304509,
+            "top_confusion": "Impact"
+          }
+        }
+      }
+    },
+    {
+      "device": "combined-cycle-10",
+      "n_test": 1456,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Command & Control"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.9734496169919016,
+        "per_class": {
+          "Benign": {
+            "n": 39,
+            "recall": 1.0,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 964,
+            "recall": 0.9356846473029046,
+            "top_confusion": "Reconnaissance"
+          },
+          "Credential Access": {
+            "n": 417,
+            "recall": 0.988009592326139,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 32,
+            "recall": 0.96875,
+            "top_confusion": "Tool Transfer"
+          },
+          "Command & Control": {
+            "n": 4,
+            "recall": 1.0,
+            "top_confusion": "Command & Control"
+          }
+        }
+      }
+    },
+    {
+      "device": "domotic-monitor-1",
+      "n_test": 4591,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Command & Control",
+        "Impact"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.9819888724313038,
+        "per_class": {
+          "Benign": {
+            "n": 228,
+            "recall": 1.0,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 982,
+            "recall": 0.9429735234215886,
+            "top_confusion": "Reconnaissance"
+          },
+          "Credential Access": {
+            "n": 418,
+            "recall": 0.9904306220095693,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 35,
+            "recall": 0.9714285714285714,
+            "top_confusion": "Tool Transfer"
+          },
+          "Command & Control": {
+            "n": 3,
+            "recall": 1.0,
+            "top_confusion": "Command & Control"
+          },
+          "Impact": {
+            "n": 2925,
+            "recall": 1.0,
+            "top_confusion": "Impact"
+          }
+        }
+      }
+    },
+    {
+      "device": "ip-camera-museum-1",
+      "n_test": 6590,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Command & Control",
+        "Impact"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.6045794206186571,
+        "per_class": {
+          "Benign": {
+            "n": 20,
+            "recall": 1.0,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 23,
+            "recall": 0.0,
+            "top_confusion": "Credential Access"
+          },
+          "Credential Access": {
+            "n": 392,
+            "recall": 0.9617346938775511,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 2,
+            "recall": 0.5,
+            "top_confusion": "Reconnaissance"
+          },
+          "Command & Control": {
+            "n": 28,
+            "recall": 0.21428571428571427,
+            "top_confusion": "Benign"
+          },
+          "Impact": {
+            "n": 6125,
+            "recall": 1.0,
+            "top_confusion": "Impact"
+          }
+        }
+      }
+    },
+    {
+      "device": "ip-camera-street-1",
+      "n_test": 4105,
+      "common_classes": [
+        "Benign",
+        "Reconnaissance",
+        "Credential Access",
+        "Tool Transfer",
+        "Command & Control",
+        "Impact"
+      ],
+      "zero_shot_classes": [],
+      "model": {
+        "macro_f1_common": 0.9562484845033437,
+        "per_class": {
+          "Benign": {
+            "n": 23,
+            "recall": 1.0,
+            "top_confusion": "Benign"
+          },
+          "Reconnaissance": {
+            "n": 937,
+            "recall": 0.9316969050160085,
+            "top_confusion": "Reconnaissance"
+          },
+          "Credential Access": {
+            "n": 408,
+            "recall": 0.9779411764705882,
+            "top_confusion": "Credential Access"
+          },
+          "Tool Transfer": {
+            "n": 37,
+            "recall": 0.9459459459459459,
+            "top_confusion": "Tool Transfer"
+          },
+          "Command & Control": {
+            "n": 4,
+            "recall": 1.0,
+            "top_confusion": "Command & Control"
+          },
+          "Impact": {
+            "n": 2696,
+            "recall": 1.0,
+            "top_confusion": "Impact"
+          }
+        }
+      }
+    }
+  ]
+}

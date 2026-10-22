@@ -1,0 +1,48 @@
+{
+  "platform": {
+    "machine": "arm64",
+    "processor": "arm",
+    "torch": "2.12.0",
+    "cpu_threads": 4
+  },
+  "checkpoint": "models/S3_fpc_gmu.pt",
+  "checkpoint_mb": 0.965877,
+  "n_params": 237491,
+  "model_cpu": {
+    "latency_ms_median": 0.6097915029386058,
+    "latency_ms_p95": 0.6681604449113365,
+    "throughput_windows_per_s_by_batch": {
+      "16": 3404.0586751404117,
+      "64": 3502.8706297504173,
+      "256": 3360.8287853717966,
+      "1024": 3249.2311367724706
+    }
+  },
+  "model_mps": {
+    "latency_ms_median": 0.9583339997334406,
+    "latency_ms_p95": 1.0483003541594371,
+    "throughput_windows_per_s_by_batch": {
+      "16": 7630.174970664127,
+      "64": 7931.487316382938,
+      "256": 4852.32549188068,
+      "1024": 5463.522370132301
+    }
+  },
+  "end_to_end_cpu": {
+    "pcaps": [
+      "iotsim-air-quality-1_0-0_to_OpenvSwitch-25_1-0.pcap"
+    ],
+    "n_packets": 49081,
+    "n_windows": 1528,
+    "n_events": 8,
+    "stage_seconds": {
+      "parse_windows": 0.47715670900652185,
+      "features": 0.1435806659865193,
+      "model": 0.504959832993336,
+      "events": 0.01056100000278093
+    },
+    "total_seconds": 1.136258207989158,
+    "packets_per_s": 43195.28752787528,
+    "windows_per_s": 1344.764763199475
+  }
+}

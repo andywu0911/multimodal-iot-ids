@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gotham-iot-ids"
+version = "0.1.0"
+description = "多模態深度學習之物聯網入侵偵測系統（Gotham Dataset 2025）"
+requires-python = ">=3.11"
+dependencies = [
+    "torch==2.12.0",
+    "xgboost==3.2.0",
+    "scikit-learn==1.7.2",
+    "pandas==2.3.3",
+    "pyarrow==21.0.0",
+    "dpkt",
+    "numpy==2.3.5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools]
+py-modules = ["config"]
+packages = ["src", "src.pcap", "src.features", "src.models", "src.events", "src.report", "src.audit"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"

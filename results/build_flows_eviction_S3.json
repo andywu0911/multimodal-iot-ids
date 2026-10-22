@@ -1,0 +1,21 @@
+{
+  "subset": "S3",
+  "total_eviction_events": 7,
+  "affected": [
+    {
+      "device": "building-monitor-1",
+      "scenario": "mirai-dos",
+      "eviction_events": 2
+    },
+    {
+      "device": "combined-cycle-1",
+      "scenario": "mirai-dos",
+      "eviction_events": 2
+    },
+    {
+      "device": "ip-camera-museum-1",
+      "scenario": "mirai-dos",
+      "eviction_events": 3
+    }
+  ]
+}

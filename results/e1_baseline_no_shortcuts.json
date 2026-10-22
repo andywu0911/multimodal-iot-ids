@@ -1,0 +1,216 @@
+{
+  "experiment": "E1_baseline_reproduction_no_shortcuts",
+  "target_paper": "Belarbi et al. 2025, arXiv:2502.03134, Table 4",
+  "target_metrics": {
+    "accuracy": 0.89,
+    "Infection_f1": 0.0,
+    "Normal_recall": 0.52
+  },
+  "settings": {
+    "devices": [
+      "air-quality-1",
+      "building-monitor-1",
+      "city-power-1",
+      "combined-cycle-1",
+      "combined-cycle-10",
+      "domotic-monitor-1"
+    ],
+    "sample_frac": 0.1,
+    "epochs": 20,
+    "batch_size": 4096,
+    "lr": 0.001,
+    "seed": 42,
+    "n_train": 1227594,
+    "n_test": 306895,
+    "drop_shortcuts": true,
+    "dropped_columns": [
+      "eth.src",
+      "eth.dst",
+      "ip.dst",
+      "ip.src",
+      "ip.checksum",
+      "tcp.checksum",
+      "tcp.srcport",
+      "tcp.dstport",
+      "udp.srcport",
+      "udp.dstport"
+    ],
+    "n_features": 12
+  },
+  "provenance": {
+    "git_sha": "2a3f5680bd74b2bb87a3e2acd3db95b2f6ef19f3",
+    "git_dirty": true,
+    "config": {
+      "PROJECT_ROOT": ".",
+      "GOTHAM_ROOT": "data/raw/gotham2025",
+      "PCAP_ROOT": "data/raw/gotham2025/raw",
+      "OFFICIAL_CSV_ROOT": "data/raw/gotham2025/processed",
+      "DATA_INTERIM": "data/interim",
+      "DATA_PROCESSED": "data/processed",
+      "LABEL_INDEX_DIR": "data/interim/label_index",
+      "FLOW_DIR": "data/processed/flows",
+      "FEATURES_DIR": "data/processed/features",
+      "RESULTS_DIR": "results",
+      "CHECKPOINTS_DIR": "models",
+      "RANDOM_SEED": 42,
+      "SCENARIOS": {
+        "benign": "benign",
+        "network-scanning": "malicious/network-scanning",
+        "coap-amplificator": "malicious/coap-amplificator",
+        "merlin": "malicious/merlin",
+        "mirai-infection": "malicious/mirai-infection",
+        "mirai-dos": "malicious/mirai-dos"
+      },
+      "SCENARIO_DATES": {
+        "benign": "2025-01-14",
+        "network-scanning": "2025-01-14",
+        "coap-amplificator": "2025-01-15",
+        "merlin": "2025-01-17",
+        "mirai-infection": "2025-01-18",
+        "mirai-dos": "2025-01-25"
+      },
+      "PCAP_PREFIX": "iotsim-",
+      "ATTACKED_DEVICES": [
+        "air-quality-1",
+        "building-monitor-1",
+        "city-power-1",
+        "combined-cycle-1",
+        "combined-cycle-10",
+        "domotic-monitor-1",
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "CAMERA_DEVICES": [
+        "ip-camera-museum-1",
+        "ip-camera-street-1"
+      ],
+      "SUBSETS": {
+        "S1": {
+          "devices": [
+            "air-quality-1",
+            "combined-cycle-10"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S2": {
+          "devices": [
+            "air-quality-1",
+            "building-monitor-1",
+            "city-power-1",
+            "combined-cycle-1",
+            "combined-cycle-10",
+            "domotic-monitor-1"
+          ],
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        },
+        "S3": {
+          "devices": null,
+          "scenarios": [
+            "benign",
+            "network-scanning",
+            "coap-amplificator",
+            "merlin",
+            "mirai-infection",
+            "mirai-dos"
+          ]
+        }
+      },
+      "FLOW_KEY_MODE": "5tuple",
+      "FLOW_KEY_MODES": [
+        "5tuple",
+        "hostpair"
+      ],
+      "IDLE_TIMEOUT": 60.0,
+      "ACTIVE_TIMEOUT": 300.0,
+      "MAX_PKTS_PER_FLOW": 200,
+      "PAYLOAD_BYTES": 512,
+      "MAX_OPEN_FLOWS": 2000000,
+      "INNER_CARD_CAP": 4096,
+      "MAX_FLOWS_PER_RAW_LABEL": 5000,
+      "E1_SAMPLE_FRAC": 0.1,
+      "SPLIT_TRAIN_FRAC": 0.6,
+      "SPLIT_VAL_FRAC": 0.2,
+      "SHORTCUT_COLUMNS": [
+        "device",
+        "src_ip",
+        "dst_ip",
+        "src_mac",
+        "dst_mac",
+        "src_port",
+        "dst_port",
+        "ip_checksum",
+        "tcp_checksum"
+      ],
+      "VIEW_A_PORT_VARIANTS": [
+        "with_port",
+        "no_port"
+      ]
+    }
+  },
+  "accuracy": 0.9867674611837925,
+  "classification_report": {
+    "Normal": {
+      "precision": 0.998062015503876,
+      "recall": 0.8925476603119584,
+      "f1-score": 0.9423604757548033,
+      "support": 577.0
+    },
+    "Network Scanning": {
+      "precision": 0.7757148402121878,
+      "recall": 0.9830300049188392,
+      "f1-score": 0.8671536013884872,
+      "support": 12198.0
+    },
+    "Brute Force": {
+      "precision": 0.47745358090185674,
+      "recall": 0.05096262740656852,
+      "f1-score": 0.0920951650038373,
+      "support": 3532.0
+    },
+    "Infection": {
+      "precision": 0.9705882352941176,
+      "recall": 0.1360824742268041,
+      "f1-score": 0.23869801084990958,
+      "support": 485.0
+    },
+    "C&C Communication": {
+      "precision": 0.5271122320302648,
+      "recall": 0.954337899543379,
+      "f1-score": 0.6791226645004061,
+      "support": 438.0
+    },
+    "DoS": {
+      "precision": 0.9999344110631276,
+      "recall": 0.999996547736178,
+      "f1-score": 0.999965478434378,
+      "support": 289665.0
+    },
+    "accuracy": 0.9867674611837925,
+    "macro avg": {
+      "precision": 0.791477552500905,
+      "recall": 0.6694928690239546,
+      "f1-score": 0.6365658993219703,
+      "support": 306895.0
+    },
+    "weighted avg": {
+      "precision": 0.9842846220497145,
+      "recall": 0.9867674611837925,
+      "f1-score": 0.9824688780203272,
+      "support": 306895.0
+    }
+  }
+}
