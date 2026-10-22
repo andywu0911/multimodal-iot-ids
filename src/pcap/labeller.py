@@ -3,7 +3,7 @@
 標籤對齊統一在此。official CSV 沒有封包 id，
 用「frame.time（微秒精度）+ frame.len」作為 join key —— 在 air-quality-1
 上驗證過 55,052 列 CSV 對到 55,070 個 IPv4 封包，match rate 99.97%
-（未對到的是罕見的 timestamp+len 完全重複而 CSV 只留первое occurrence 的情況）。
+（未對到的是罕見的 timestamp+len 完全重複而 CSV 只留第一筆的情況）。
 
 不用五元組 join：GRE 隧道封包的官方 CSV 只保留「外層」ip.src/ip.dst 單一值，
 但本專案的 flow builder 用剝殼後的「內層」五元組建 flow，兩者天然對不上。
